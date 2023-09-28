@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NewTrainer from "./NewTrainer";
 
-const Trainers = ({trainers}) => {
+const Trainers = ({trainers, newTrainer}) => {
     return (
       <div>
         <h1>All the Trainers</h1>
@@ -15,6 +16,7 @@ const Trainers = ({trainers}) => {
             )
           })
         }
+        <NewTrainer newTrainer={newTrainer}/>
       </div>
     )
   }

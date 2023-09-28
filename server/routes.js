@@ -27,6 +27,32 @@ router.get('/pokemons', async(req,res,next) => {
     }
   })
 
+  router.post('/trainers', async(req,res,next) => {
+    try {
+      const SQL = `
+        INSERT INTO trainers(name) values($1)
+        RETURNING *
+      `
+      const response = await client.query(SQL, [req.body.name]);
+      res.send(response.rows[0])
+    } catch (error) {
+      next(error)
+    }
+  })
+
+  router.post('/pokemons', async(req,res,next) => {
+    try {
+      const SQL = `
+        INSERT INTO pokemons(name, trainer_id) values($1, null)
+        RETURNING *
+      `
+      const response = await client.query(SQL, [req.body.name]);
+      res.send(response.rows[0])
+    } catch (error) {
+      next(error)
+    }
+  })
+
   router.put('/pokemons/:id', async(req,res,next) => {
     try {
       const SQL = `
